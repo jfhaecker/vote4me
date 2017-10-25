@@ -1,0 +1,17 @@
+{
+  "name": "vote4me",
+  "description": "vote4me server",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "~4.13.4",
+    "serve-favicon" : "~2.4.5",
+    "cookie-parser" : "~1.4.3",
+    "body-parser" : "~1.18.2",
+    "socket.io"  :  "~2.0.4",
+    "tracer"     :  "~0.8.11",
+    "mongoose"   :  "~4.12.4"
+  },
+  "devDependencies": {
+  }
+}
