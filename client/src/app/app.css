@@ -1,0 +1,124 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+div#main {
+    background-color: darkcyan;
+    width: 500px;
+    height: 600px;
+    margin-left: 100px;
+}
+
+div#form {
+
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div#votes {
+    border: 1px dashed silver;
+    float:right;
+    margin-right: 1em;
+    margin-top: 1em;
+    background-color: cornflowerblue;
+}
+
+div#login {
+    background-color: blanchedalmond;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.checkboxes  {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.checkbox input {
+    vertical-align: bottom;
+
+}
+.container {
+    border:2px solid #ccc;
+    width:300px; height: 100px;
+    overflow-y: scroll;
+    background-color: coral
+}
+
+.invitations {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow-y: scroll;
+    background-color: #BB6688;
+    height: 100px;
+    font: 90% Arial;
+}
+.buttons {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #b3d4fc;
+    padding: 10px;
+}
+/*
+.checkboxes label span {
+    display: inline;
+}
+*/
+
+.submit {
+    background-color: springgreen;
+    wifth:120px;
+    height:40px;
+
+}
+
+label#header {
+    float: left;
+}
+
+.text {
+    margin-top: 5em;
+
+}
+
+
+
+html, body, input {
+    font: 100% Arial, Helvetica, sans-serif;
+}
