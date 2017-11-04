@@ -1,29 +1,32 @@
-var express = require('express');
+const config = require('./config');
+
 var path = require('path');
+
 var favicon = require('serve-favicon');
 //var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var colors = require('colors');
 
-var routes = require('./routes/index');
+var routes = require('./routes/index.js');
 var users = require('./routes/users');
 
-var webSocket = require('http').Server(express);
-var io = require('socket.io').listen(webSocket);
 var logger = require('tracer').colorConsole({level : 'trace'});
-
 var util = require('util');
-webSocket.listen(8080, function () {
-    logger.info('Websocket listening on *:8080');
-});
 
+const express = require('express')
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
-var app = express();
+server.listen(config.http.port);
+
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../client/src/app'));
+app.engine('html', require('ejs').renderFile);
+
+//app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -31,9 +34,14 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+
+app.use(express.static(path.join(__dirname, '../client/src/app')));
+app.use(express.static(path.join(__dirname, '../client/node_modules')));
+
+
+//app.use('/', routes);
+//app.use(express.static("../"+__dirname));
 app.use('/users', users);
 
 
@@ -43,8 +51,10 @@ setUpMongo(mongoose);
 // Mapping username->socket
 clients = [];
 
-io.sockets.on('connection', function (socket) {
-    logger.trace("Client connected:" + socket.id);
+io.on('connection', function (socket) {
+    const handshake = socket.handshake.address;
+    logger.trace("Client connected:" + socket.id + "from "+handshake.address);
+
     //console.log("Client connected:" + util.inspect(socket, { showHidden: true, depth: 4 }));
 
     socket.on('disconnect', function () {

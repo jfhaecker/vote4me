@@ -108,7 +108,7 @@ myControllers.controller('InviteFriendsForNewVoteCtrl', ['$scope', '$http', '$lo
 
             var now = moment().format('YYYY-MM-D H:mm');
             console.log(now);
-            $http.post('http://localhost:3000/inviteforvote/', {
+            $http.post('http://localhost:8080/inviteforvote/', {
                 creationDate: now,
                 owner: $scope.getCurrentUser(),
                 votetext: $scope.randomtext,

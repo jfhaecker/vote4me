@@ -24,7 +24,7 @@ vote4meServices.factory('currentUserService', function () {
 });
 
 vote4meServices.factory('VotingService', function ($http) {
-    var uri = 'http://localhost:3000/dovote/';
+    var uri = 'http://localhost:8080/dovote/';
     var VotingService = {};
 
     VotingService.voteTop = function (id, friend, owner) {
@@ -33,7 +33,7 @@ vote4meServices.factory('VotingService', function ($http) {
             friend: friend,
             result: '1',
             owner: owner
-        }).success(function (data, status, headers, config) {
+        }).then(function (data, status, headers, config) {
             console.log("Post success: " + uri + " " + status);
         }).error(function (data, status, headers, config) {
             console.log('Error http  %s %s %s %s', data, status, header, config);
@@ -46,7 +46,7 @@ vote4meServices.factory('VotingService', function ($http) {
             friend: friend,
             result: '-1',
             owner: owner
-        }).success(function (data, status, headers, config) {
+        }).then(function (data, status, headers, config) {
             console.log("Post success: " + uri + " " + status);
         }).error(function (data, status, headers, config) {
             console.log('Error http  %s %s %s %s', data, status, header, config);
@@ -62,7 +62,7 @@ vote4meServices.factory('friendListService', ['$http', '$q', function($http, $q)
             var def = $q.defer();
             var uri = 'http://localhost:3000/friends/' + user;
             $http.get(uri)
-                .success(function (data, status, headers, config) {
+                .then(function (data, status, headers, config) {
                     console.log("Got friendlist" + JSON.stringify(data));
                     def.resolve(data);
                 })
@@ -100,16 +100,27 @@ vote4meServices.factory('invitationService', ['$http', function ($http) {
 
     invitationService.loadInvitations = function (user) {
         console.log("load invitations for " + user);
-        var uri = 'http://localhost:3000/tovotelist/' + user;
+
+	$http({
+		method: 'Get',
+		url: 'tovotelist'
+	}).then(function successCallback(response) {
+        	console.log("Got list to vote" + JSON.stringify(response));
+	}, function errorCallback(response) {
+		console.log("Error:"+response);
+	});
+ 	
+
+        /*var uri = 'http://localhost:3000/tovotelist/' + user;
         console.log("Http get to %s", uri);
         $http.get(uri).
-            success(function (data, status, headers, config) {
-                console.log("Got list to vote" + JSON.stringify(data));
+            then(function (data, status, headers, config) {
                 invitationList = data;
             }).
             error(function (data, status, headers, config) {
                 console.log('Error http %s %s %s %s %s', uri, data, status, header, config);
-            });
+            });*/
+        var invitationList;
         return invitationList;
     }
 
@@ -118,7 +129,7 @@ vote4meServices.factory('invitationService', ['$http', function ($http) {
         var uri = 'http://localhost:3000/myvotelist/' + user;
         console.log("Http get to %s", uri);
         $http.get(uri).
-            success(function (data, status, headers, config) {
+            then(function (data, status, headers, config) {
                 console.log("Got list for my onwed vote" + JSON.stringify(data));
                 myVoteList = data;
             }).
