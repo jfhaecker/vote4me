@@ -1,0 +1,34 @@
+<div>
+    <div>
+        <label>Logged in as </label><label ng-bind="getCurrentUser()">loading...</label>
+    </div>
+    <div>
+        <a href="#/invitefriends/">Make new vote and invite friends</a>
+    </div>
+    <div>
+        Hier kannst du voten:
+        <div class="invitations">
+            <div ng-repeat="vote in getInvitations() | orderBy:'creationDate':true">
+                <a href="#/dovote/{{vote._id}}">
+                    <span ng-bind="vote.votetext"></span> from <span ng-bind="vote.owner"></span> at <span
+                        ng-bind="vote.creationDate"></span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        Übersicht über deine eingestellten Votes:
+        <div class="invitations">
+        </div>
+    </div>
+
+    <div>
+        Eventlog:
+        <ul>
+            <li  ng-repeat="event in getEventLog()">{{event}}</li>
+        </ul>
+
+    </div>
+</div>

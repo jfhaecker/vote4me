@@ -1,0 +1,10 @@
+
+<div>
+    <span ng-bind="vote.owner"></span> at
+    <span ng-bind="vote.creationDate"></span> says
+    <h1><span ng-bind="vote.votetext"></span></h1>
+    <div>
+        <button ng-click="voteTop(vote._id)">Top</button>
+        <button ng-click="voteFlop(vote._id)">Flopp</button>
+    </div>
+</div>

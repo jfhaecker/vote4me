@@ -1,0 +1,25 @@
+<div>
+    <a href="#/overview/">Overview</a>
+    <form ng-submit="invite()" class="buttons">
+
+        <label>Select some friends:)</label>
+
+        <div class="container">
+
+            <div ng-repeat="friend in friends">
+                <label>
+                    <input type="checkbox" ng-model="invites[$index]" id="{{$id}}" value="{{$friend}}" checked="true"/>
+                    <span for="{{$index}}" ng-bind="friend"/>
+                </label>
+            </div>
+        </div>
+
+        <div class="text">
+            <span>Enter vote:</span>
+            <input type="text" ng-model="randomtext" size="50"/>
+        </div>
+        <div>
+            <input class="submit" type="submit" id="submit" value="Vote4me!"/>
+        </div>
+    </form>
+</div>
